@@ -27,7 +27,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 
   void switchToForgotPasswordTab() {
-    _tabController.animateTo(1); // Switch to the Forgot Password tab
+    _tabController.animateTo(1);
   }
 
   @override
@@ -36,7 +36,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       backgroundColor: Colors.white,
       body: Row(
         children: [
-          // Animated Section
           Expanded(
             flex: 1,
             child: rive.RiveAnimation.asset(
@@ -44,7 +43,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               fit: BoxFit.cover,
             ),
           ),
-          // Form Section
           Expanded(
             flex: 1,
             child: Padding(
@@ -69,7 +67,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   ),
                   SizedBox(height: 24.0),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16.0),
@@ -90,7 +89,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           indicator: BoxDecoration(
                             borderRadius: BorderRadius.circular(25.0),
                             gradient: LinearGradient(
-                              colors: [Colors.blueAccent, Colors.lightBlueAccent],
+                              colors: [
+                                Colors.blueAccent,
+                                Colors.lightBlueAccent
+                              ],
                             ),
                           ),
                           labelColor: Colors.white,
@@ -106,7 +108,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           tabs: [
                             Tab(
                               child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 16.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25.0),
                                   color: _tabController.index == 0
@@ -121,7 +124,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             ),
                             Tab(
                               child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10.0, horizontal: 16.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25.0),
                                   color: _tabController.index == 1
@@ -216,7 +220,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ),
           ),
           SizedBox(height: 20.0),
-          if (_tabController.index == 0) // Show only when Login tab is selected
+          if (_tabController.index == 0) 
             Align(
               alignment: Alignment.center,
               child: TextButton(
@@ -263,7 +267,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           SizedBox(height: 30.0),
           ElevatedButton(
             onPressed: () {
-              // Implement forgot password logic here
+              
             },
             child: Text('Reset Password', style: TextStyle(fontSize: 16.0)),
             style: ElevatedButton.styleFrom(

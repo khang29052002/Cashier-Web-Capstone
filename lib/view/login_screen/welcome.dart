@@ -52,8 +52,8 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 children: <Widget>[
                   Image.asset(
                     'assets/images/Logo.png',
-                    width: 120.0,
-                    height: 120.0,
+                    width: 140.0,
+                    height: 140.0,
                   ),
                   SizedBox(height: 16.0),
                   Text(
@@ -61,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                       color: Colors.black,
                     ),
                   ),
@@ -242,45 +242,46 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     );
   }
 
-  Widget _buildForgotPasswordForm() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            width: 340,
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.black45),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
+Widget _buildForgotPasswordForm() {
+  return Padding(
+    padding: const EdgeInsets.only(top: 80.0, bottom: 20.0), // Tăng khoảng cách trên
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          width: 340,
+          child: TextField(
+            decoration: InputDecoration(
+              labelText: 'Email',
+              labelStyle: TextStyle(color: Colors.black45),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue),
+                borderRadius: BorderRadius.circular(12.0),
               ),
             ),
           ),
-          SizedBox(height: 30.0),
-          ElevatedButton(
-            onPressed: () {
-              
-            },
-            child: Text('Reset Password', style: TextStyle(fontSize: 16.0)),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
+        ),
+        SizedBox(height: 30.0),
+        ElevatedButton(
+          onPressed: () {
+            // Xử lý logic ở đây
+          },
+          child: Text('Reset Password', style: TextStyle(fontSize: 16.0)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 80.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
+
 }

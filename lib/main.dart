@@ -1,6 +1,7 @@
 import 'package:cashier_web_/homepage.dart';
 import 'package:cashier_web_/splash_screen.dart';
-import 'package:cashier_web_/view/login_screen/welcome.dart';
+import 'package:cashier_web_/view/screens/edit_profile.dart';
+import 'package:cashier_web_/view/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,8 +34,11 @@ class MyApp extends StatelessWidget {
           page: () => const HomeScreen(),
           transition: Transition.rightToLeft,
         ),
+        GetPage(
+         name: '/edit_profile',
+         page: () => EditProfilePage())
       ],
-      home: SplashScreen(),
+      home: HomeScreen(),
     );
   }
 }

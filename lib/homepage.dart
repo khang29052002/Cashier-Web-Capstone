@@ -1,10 +1,10 @@
-import 'package:cashier_web_/view/screens/dashboard.dart';
+import 'dart:html' as html; 
 import 'package:cashier_web_/view/screens/history.dart';
 import 'package:cashier_web_/view/screens/menu.dart';
 import 'package:cashier_web_/view/screens/setting.dart';
 import 'package:cashier_web_/widgets/navigation_rail_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +15,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  bool _isDarkMode = false;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -24,30 +23,81 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _handleMenuSelection(String value) {
-    switch (value) {
-      case 'editProfile':
-        Get.toNamed('/edit_profile');
-        break;
-      case 'logout':
-      
-        break;
+  switch (value) {
+    case 'Profile':
+      setState(() {
+        _selectedIndex = 3; 
+      });
+      break;
+    case 'logout':
+      _logout();
+      break;
+  }
+}
+
+
+  Future<void> _logout() async {
+    try {
+      // Clear local storage
+      html.window.localStorage.clear();
+      Get.offNamed('/welcome');
+    } catch (e) {
+      print('Logout failed: $e');
     }
+  }
+
+  void _showPopupMenu(TapDownDetails details) {
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    final Offset offset = renderBox.globalToLocal(details.globalPosition);
+
+    showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(
+        offset.dx - 60, // Move menu to the left
+        offset.dy + 30, // Move menu down
+        renderBox.size.width - offset.dx,
+        renderBox.size.height - offset.dy,
+      ),
+      items: [
+        PopupMenuItem<String>(
+          value: 'Profile',
+          child: ListTile(
+            leading: Icon(Icons.person, color: Colors.black),
+            title: Text('Profile',
+                style: TextStyle(color: Colors.black, fontSize: 12)),
+          ),
+        ),
+        PopupMenuItem<String>(
+          value: 'logout',
+          child: ListTile(
+            leading: Icon(Icons.logout, color: Colors.red),
+            title: Text('Logout',
+                style: TextStyle(color: Colors.black, fontSize: 12)),
+          ),
+        ),
+      ],
+      color: Colors.white, // Menu background color
+      elevation: 8.0, // Menu shadow
+    ).then((value) {
+      if (value != null) {
+        _handleMenuSelection(value);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.white,
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Row(
             children: [
               NavigationRailWidget(
-                isDarkMode: _isDarkMode,
                 selectedIndex: _selectedIndex,
                 onItemTapped: _onItemTapped,
                 onLogout: () {
-               
+                  // Optionally, you can call _logout here if needed
                 },
               ),
               VerticalDivider(
@@ -66,34 +116,37 @@ class _HomeScreenState extends State<HomeScreen> {
           Positioned(
             top: 16,
             right: 16,
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/Logo.png'),
-              radius: 34, 
-              child: PopupMenuButton<String>(
-                icon: Icon(Icons.more_vert),
-                tooltip: '', 
-                onSelected: _handleMenuSelection,
-                offset: Offset(-20, 40), 
-                color: Colors.white, 
-                itemBuilder: (BuildContext context) {
-                  return [
-                    PopupMenuItem<String>(
-                      value: 'editProfile',
-                      child: Text(
-                        'Edit Profile',
-                        style: TextStyle(color: Colors.black),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end, // Align text to the right
+                  children: [
+                    Text(
+                      'Khang', // Replace with actual user name
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    PopupMenuItem<String>(
-                      value: 'logout',
-                      child: Text(
-                        'Logout',
-                        style: TextStyle(color: Colors.black),
+                    Text(
+                      'Cashier Web', // User role
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
                       ),
                     ),
-                  ];
-                },
-              ),
+                  ],
+                ),
+                SizedBox(width: 8), // Spacing between text and avatar
+                GestureDetector(
+                  onTapDown: _showPopupMenu,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/Logo.png'),
+                    radius: 34,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -104,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildContent() {
     switch (_selectedIndex) {
       case 0:
-        return const DashboardPage();
+        return const HomeScreen();
       case 1:
         return const MenuPage();
       case 2:
@@ -112,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 3:
         return const SettingsPage();
       default:
-        return const DashboardPage();
+        return const HomeScreen();
     }
   }
 }

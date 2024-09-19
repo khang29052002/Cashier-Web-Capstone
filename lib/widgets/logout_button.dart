@@ -22,12 +22,12 @@ class LogoutButton extends StatelessWidget {
           children: [
             Icon(
               Icons.logout,
-              color: Colors.grey.shade700,
+              color: Colors.red,
               size: 20,
             ),
             SizedBox(height: 4),
             Text(
-              'Sign Out',
+              'LogOut',
               style: TextStyle(
                 color: Colors.grey.shade700,
                 fontWeight: FontWeight.normal,

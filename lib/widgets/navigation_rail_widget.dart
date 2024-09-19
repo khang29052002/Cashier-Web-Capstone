@@ -1,15 +1,12 @@
-
 import 'package:cashier_web_/widgets/logout_button.dart';
 import 'package:flutter/material.dart';
 
 class NavigationRailWidget extends StatelessWidget {
-  final bool isDarkMode;
   final int selectedIndex;
   final ValueChanged<int> onItemTapped;
   final VoidCallback onLogout;
 
   const NavigationRailWidget({
-    required this.isDarkMode,
     required this.selectedIndex,
     required this.onItemTapped,
     required this.onLogout,
@@ -20,7 +17,7 @@ class NavigationRailWidget extends StatelessWidget {
     return Container(
       width: 110,
       decoration: BoxDecoration(
-        color: isDarkMode ? Colors.grey[800] : Colors.white,
+        color: Colors.white,
         border: Border.all(
           color: Colors.grey.shade300,
           width: 1,
@@ -44,9 +41,11 @@ class NavigationRailWidget extends StatelessWidget {
               labelType: NavigationRailLabelType.all,
               destinations: [
                 _buildNavigationDestination(Icons.dashboard, 'Dashboard', 0),
-                _buildNavigationDestination(Icons.card_membership, 'Package', 1),
+                _buildNavigationDestination(
+                    Icons.card_membership, 'Package', 1),
                 _buildNavigationDestination(Icons.history, 'History', 2),
                 _buildNavigationDestination(Icons.settings, 'Settings', 3),
+                _buildNavigationDestination(Icons.card_membership, 'E-Tag', 4),
               ],
             ),
           ),
@@ -57,13 +56,16 @@ class NavigationRailWidget extends StatelessWidget {
     );
   }
 
-  NavigationRailDestination _buildNavigationDestination(IconData icon, String label, int index) {
+  NavigationRailDestination _buildNavigationDestination(
+      IconData icon, String label, int index) {
     bool isSelected = selectedIndex == index;
     return NavigationRailDestination(
       icon: Container(
         width: 100,
         decoration: BoxDecoration(
-          color: isSelected ? Color.fromARGB(255, 30, 144, 255) : Colors.transparent,
+          color: isSelected
+              ? Color.fromARGB(255, 30, 144, 255)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(4),
         ),
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),

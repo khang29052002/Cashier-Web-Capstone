@@ -28,12 +28,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller.forward();
 
-    Timer(
-      Duration(seconds: 4),
-      () {
-        Get.offNamed('/welcome'); 
-      },
-    );
+    // Đổi sang sử dụng Future.delayed để đồng bộ hóa hơn
+    Future.delayed(Duration(seconds: 3), () {
+      Get.offNamed('/welcome'); 
+    });
   }
 
   @override

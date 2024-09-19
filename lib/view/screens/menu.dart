@@ -126,18 +126,20 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
               ),
               itemCount: _filteredPackages().length,
               itemBuilder: (context, index) {
-                final package = _filteredPackages()[index];
-                return Wrap(
-                  children: [
-                    PackageCard(
-                      title: package['title']!,
-                      shortDescription: package['shortDescription']!,
-                      image: package['image']!,
-                      serviceDetails: package['serviceDetails']!,
-                    ),
-                  ],
-                );
-              },
+  final package = _filteredPackages()[index];
+  return Wrap(
+    children: [
+      PackageCard(
+        title: package['title']!,
+        shortDescription: package['shortDescription']!,
+        image: package['image']!,
+        serviceDetails: package['serviceDetails']!,
+        price: package['price']!, // Add this line
+      ),
+    ],
+  );
+},
+
             ),
           ),
         ],
@@ -146,51 +148,44 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
   }
 
   List<Map<String, dynamic>> _packages = [
-    {
-      'title': 'Combo Beach',
-      'shortDescription': 'Discover beautiful beaches...',
-      'image': 'assets/images/on_shore_combo.jpg',
-      'serviceDetails': [
-        'Beach walking tour',
-        'Seafood tasting',
-        'Beach sports',
-      ],
-      'category': 'Beach',
-    },
-    {
-      'title': 'Combo Island',
-      'shortDescription': 'Enjoy underwater activities...',
-      'image': 'assets/images/on_water_combo.jfif',
-      'serviceDetails': [
-        'Diving',
-        'Fishing',
-        'Exploring pristine islands',
-      ],
-      'category': 'Island',
-    },
-    {
-      'title': 'Combo Combination',
-      'shortDescription': 'Combine beach and island experiences...',
-      'image': 'assets/images/all_inclusive_combo.jfif',
-      'serviceDetails': [
-        'Boat tour',
-        'Water sports',
-        'Beach picnic',
-      ],
-      'category': 'Combination',
-    },
-    {
-      'title': 'Combo Combination',
-      'shortDescription': 'Combine beach and island experiences...',
-      'image': 'assets/images/all_inclusive_combo.jfif',
-      'serviceDetails': [
-        'Boat tour',
-        'Water sports',
-        'Beach picnic',
-      ],
-      'category': 'Combination',
-    },
-  ];
+  {
+    'title': 'Combo Beach',
+    'shortDescription': 'Discover beautiful beaches...',
+    'image': 'assets/images/on_shore_combo.jpg',
+    'serviceDetails': [
+      'Beach walking tour',
+      'Seafood tasting',
+      'Beach sports',
+    ],
+    'category': 'Beach',
+    'price': 200000, // Add price field
+  },
+  {
+    'title': 'Combo Island',
+    'shortDescription': 'Enjoy underwater activities...',
+    'image': 'assets/images/on_water_combo.jfif',
+    'serviceDetails': [
+      'Diving',
+      'Fishing',
+      'Exploring pristine islands',
+    ],
+    'category': 'Island',
+    'price': 350000, // Add price field
+  },
+  {
+    'title': 'Combo Combination',
+    'shortDescription': 'Combine beach and island experiences...',
+    'image': 'assets/images/all_inclusive_combo.jfif',
+    'serviceDetails': [
+      'Boat tour',
+      'Water sports',
+      'Beach picnic',
+    ],
+    'category': 'Combination',
+    'price': 500000, // Add price field
+  },
+];
+
 
   List<Map<String, dynamic>> _filteredPackages() {
     return _packages.where((package) {
